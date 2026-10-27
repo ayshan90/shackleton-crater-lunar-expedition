@@ -466,11 +466,11 @@
       height: 26px;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.92), var(--piece-color) 24%, color-mix(in srgb, var(--piece-color) 72%, #000 28%) 100%);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.92), var(--piece-color) 24%, rgba(0,0,0,0.35) 100%);
       border: 2px solid rgba(255,255,255,0.7);
       display: grid;
       place-items: center;
-      box-shadow: 0 0 18px rgba(0,0,0,0.4), 0 0 18px color-mix(in srgb, var(--piece-color) 45%, transparent);
+      box-shadow: 0 0 18px rgba(0,0,0,0.4), 0 0 18px var(--piece-color);
       animation: float 2s ease-in-out infinite;
       transition: left 0.7s cubic-bezier(.28,.82,.3,1), top 0.7s cubic-bezier(.28,.82,.3,1);
     }
@@ -705,13 +705,11 @@
   </div>
 
   <script>
-    // Game setup.
     const playerData = [
       { name: 'Astra', color: '#65d7ff', position: 0 },
       { name: 'Orion', color: '#ffb26b', position: 0 }
     ];
 
-    // Green route shortcuts.
     const ladders = {
       4: 12,
       9: 19,
@@ -720,7 +718,6 @@
       35: 47
     };
 
-    // Red hazard setbacks.
     const hazards = {
       7: 3,
       13: 6,
@@ -730,7 +727,6 @@
       46: 28
     };
 
-    // Scientific event notes with careful wording to avoid making false claims.
     const scienceEvents = {
       5: 'You discovered a promising ice-rich region in a permanently shadowed area. Further spectroscopy is required before confirming a resource deposit.',
       11: 'Your rover reached a crater ridge with steep slopes. You select the safer traverse line to reduce risk.',
@@ -743,7 +739,6 @@
     };
 
     const routePoints = [];
-    const board = document.getElementById('board');
     const checkpointLayer = document.getElementById('checkpointLayer');
     const playersLayer = document.getElementById('playersLayer');
     const routeSvg = document.getElementById('routeSvg');
@@ -1038,8 +1033,7 @@
     restartButton.addEventListener('click', resetGame);
     overlayRestart.addEventListener('click', resetGame);
 
-    const routeList = buildRoutePoints();
-    routePoints.push(...routeList);
+    routePoints.push(...buildRoutePoints());
     buildRouteSvg();
     drawShortcutConnectors();
     createCheckpointMarkers();
